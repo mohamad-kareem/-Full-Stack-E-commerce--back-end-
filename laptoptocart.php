@@ -5,21 +5,20 @@ $user_id = $_GET['userid'];
 $laptop_id = $_GET['laptopid'];
 
 // Prepare and execute the SQL query 
-$stmt = $mysqli->prepare("INSERT user_id, laptop_id INTO carts");
+$stmt = $mysqli->prepare("INSERT INTO carts (user_id, laptop_id) VALUES (?, ?)");
 $stmt->bind_param("ii", $user_id, $laptop_id);
 
-$stmt->execute();
-$result = $stmt->get_result();
+if ($stmt->execute()) {
+    // Get the number of rows affected by the INSERT statement
+    $rows_affected = $mysqli->affected_rows;
 
-// Fetch the results and store them in an array
-$r = array();
-while ($row = $result->fetch_assoc()) {
-    $r[] = $row;
-}
-if ($r > 0) {
-    $response['status'] = True;
+    if ($rows_affected > 0) {
+        $response['status'] = true;
+    } else {
+        $response['status'] = false;
+    }
 } else {
-    $response['status'] = False;
+    $response['status'] = false;
 }
 
 // Send the response as JSON
