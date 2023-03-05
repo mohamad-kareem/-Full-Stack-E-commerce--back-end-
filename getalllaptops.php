@@ -1,8 +1,10 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 include ('connection.php');
 
 // Prepare and execute the SQL query 
-$stmt = $mysqli->prepare("SELECT brand, model, price, processor_type, processor, ram, imgurl, quantity 
+$stmt = $mysqli->prepare("SELECT laptops.id, brand, model, price, processor_type, vga, processor, ram, imgurl, quantity 
 FROM laptops join brands on brands.id=laptops.brand_id");
 $stmt->execute();
 $result = $stmt->get_result();
