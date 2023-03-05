@@ -29,5 +29,6 @@ if ($num_rows == 0) {
      $response["response"] = "Incorrect password";
     }
 }
-
+ 
 echo json_encode($response);
+?>
