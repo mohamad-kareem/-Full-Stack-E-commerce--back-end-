@@ -17,7 +17,7 @@ $check_admin->fetch();
 if ($admin_doesnt_exist <= 0) {
     $response['status'] = "failed";
 } else {
-    if(password_verify($password, $hashed_password)){
+    if($password == $hashed_password){
         $response['status'] = "success";
     }else{
         $response['status'] = "failed";
