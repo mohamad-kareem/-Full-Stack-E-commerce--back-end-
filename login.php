@@ -20,6 +20,8 @@ if ($num_rows == 0) {
     
 } else {
     if (password_verify($password, $hashed_password)) {
+        session_start(); // sessionnnnnn
+        $_SESSION['user_id'] = $id; 
         $response['response'] = "logged in";
         $response['id'] = $id;
         $response['fname'] = $fname;
