@@ -11,13 +11,13 @@ $amount = $_POST['amount'];
 $memory = $_POST['memory'];
 $imgurl = $_POST['imgurl'];
 
-$check_phone = $mysqli->prepare('select model from phones where id=?');
+$check_phone = $mysqli->prepare('select id from phones where id=?');
 $check_phone->bind_param('i', $phone_id);
 $check_phone->execute();
 $check_phone->store_result();
-$phone_doesnt_exists = $check_phone->num_rows();
+$phone_doesnt_exist = $check_phone->num_rows();
 
-if ($phone_doesnt_exists <= 0) {
+if ($phone_doesnt_exist <= 0) {
     $response['status'] = "failed";
 } else {
     $query = $mysqli->prepare('update phones set brand_id=?, model=?, price=?, amount=?, memory=?, imgurl=? where id=?');
