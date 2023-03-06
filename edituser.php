@@ -14,11 +14,11 @@ $check_email = $mysqli->prepare('select email from users where email=?');
 $check_email->bind_param('s', $email_address);
 $check_email->execute();
 $check_email->store_result();
-$email_exists = $check_email->num_rows();
+$email_doesnt_exists = $check_email->num_rows();
 
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-if ($email_exists > 0) {
+if ($email_doesnt_exists <= 0) {
     $response['status'] = "failed";
 } else {
     $query = $mysqli->prepare('update users set fname=?, lname=?, password=?, phone=?, address=? where email=?');
